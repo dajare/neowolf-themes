@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="<?php echo (Setting::get('language')) ?? 'en'; ?>">
+
+<head>
+  <title><?php echo $this->title(); ?></title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="<?php echo ($this->keywords() != '') ? $this->keywords() : 'default, keywords, here'; ?>">
+  <meta name="description"
+    content="<?php echo ($this->description() != '') ? $this->description() : 'Default description goes here'; ?>">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+  <!-- Fork Awesome icons = https://forkaweso.me/ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css"
+    integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="<?php echo THEMES_PATH; ?>picnic/styles.css?<?php echo time(); ?>" />
+  <link rel="favourites icon" href="<?php echo THEMES_PATH; ?>favicon.ico" />
+
+</head>
+
+<body>
+
+  <nav>
+    <a href="<?php echo URL_PUBLIC; ?>" class="brand"><span>NeoWolf</span></a>
+    <input id="bmenu" type="checkbox" class="show">
+    <label for="bmenu" class="burger toggle pseudo button"><i class="fa fa-bars" aria-hidden="true"></i></label>
+
+    <div class="menu">
+      <?php foreach($this->find('/')->children() as $menu): ?>
+      <?php if (in_array($menu->slug, explode('/', $this->path()))) : ?>
+      <button disabled=""><?php echo $menu->title(); ?></button>
+      <?php else: ?>
+      <?php echo $menu->link($menu->title, 'class="pseudo button"'); ?>
+      <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+  </nav>
+
+  <main class="intro test">
+    <div class="flex one three-800">
+      <div class="full three-fourth-800">
+        <h2><?php echo $this->title(); ?></h2><!-- content -->
+        <?php echo $this->content(); ?>
+        <?php if ($this->hasContent('extended')) echo $this->content('extended'); ?>
+      </div>
+
+      <div class="full fourth-800">
+        <!-- sidebar -->
+        <p class="info"><a href="https://picnicss.com/">Picnic</a> theme for Neowolf</p>
+        <?php echo $this->content('sidebar', true); ?>
+
+        <!-- START SUBNAV SYSTEM -->
+        <?php
+		$post = $this->find('articles'); 
+        $all_posts = $post->archive->archivesByMonth();
+        rsort($all_posts);
+        ?>
+        <div class="extranav">
+          <?php if ($this->level() != 0) : ?>
+          <p><i class="fa fa-caret-square-o-up" aria-hidden="true"></i>&#8194;<?php echo $this->parent->link(); ?></p>
+          <?php endif; ?>
+          <p class="here"><i class="fa fa-caret-square-o-right" aria-hidden="true"></i>&#8194;<span
+              style="color: #8f8f8f;"><?php echo $this->title(); ?></span></p>
+          <?php if (count($this->children()) > 0 && $this->title() != 'Articles') : ?>
+          <?php foreach($this->children() as $subMenu): ?>
+          <p><i class="fa fa-caret-square-o-down" aria-hidden="true"></i>&#8194;
+            <?php echo $subMenu->link($subMenu->title, (in_array($subMenu->slug, explode('/', $this->link())) ? ' class="current"': null)); ?>
+          </p>
+          <?php endforeach; ?>
+          <?php endif; ?>
+
+          <?php if ($this->children() > 0 && $this->slug() == 'articles') : ?>
+          <?php foreach ($all_posts as $post_date): ?>
+          <p><i class="fa fa-caret-square-o-down" aria-hidden="true"></i>&#8194;<a
+              href="<?php echo BASE_URL .'articles/'.$post_date.URL_SUFFIX; ?>"><?php echo strftime('%B %Y', strtotime(strtr($post_date, '/', '-'))); ?></a>
+          </p>
+          <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+        <!-- END SUBNAV SYSTEM -->
+        </div>
+      </div>
+  </main>
+
+  <footer class="bottom">
+
+    <div class="flex one two-800">
+
+      <div class="full half-800">
+        <ul class="info bottomnav">
+          <li>quick links : <?php echo $menu->linkById(1); ?></li>
+          <?php foreach($this->find('/')->children() as $menu): ?>
+          <li><?php echo $menu->link(); ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+
+      <div class="full half-800">
+        <p class="info" style="text-align:center;">&copy; <?php echo date('Y'); ?> Author | Built with: NeoWolf </p>
+      </div>
+    </div>
+
+  </footer>
+
+</body>
+
+</html>

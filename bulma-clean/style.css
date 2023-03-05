@@ -1,0 +1,30 @@
+/* ADDITIONS FOR WOLFCMS */
+/* sticky footer HT: https://css-tricks.com/couple-takes-sticky-footer/#there-is-flexbox */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar h3 ~ h3 { /*for sidebar */
+padding-top: 1em;
+}
+.site-content {
+  flex: 1 0 auto;
+}
+.entry {
+  padding-bottom: 0.75em;
+}
+.footer {
+  flex-shrink: 0;
+}
+a .site-title { color: yellow; }
+.extranav { 
+  line-height: 2em;
+}
+.extranav i { color: #b6b6b6; }
+.info {
+  color: #999;
+  font-size: smaller;
+}

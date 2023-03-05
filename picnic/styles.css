@@ -1,0 +1,19 @@
+/* Additional CSS for Wolfnic layout */
+
+body {display:flex;flex-direction: column;}
+nav{background-color:#fbf3eae6;}
+.current {color:#0074d9;text-decoration:underline overline dotted grey;}
+.intro{padding:10px;max-width:960px;width:100%;margin:80px auto 60px;flex: 1 0 auto;}
+.extranav p {margin:0.2em 0;}
+.here:first-line {text-indent:-1.0em;}
+.here{margin-left:1.0em;padding-left:1.0em}
+.test>h2{padding-top:80px;margin-top:-60px}
+.info{font-size:smaller;color:#999;}
+img{max-width:94%;border-radius:8px;}
+i.fa{color:#999;}
+footer{margin:0;padding:0}
+.bottom{background-color:#fbf3ea;padding:20px;flex-shrink:0;}
+.bottomnav{text-transform:uppercase;font-size:small;}
+footer p {font-size:smaller;}
+footer ul li { display: inline; }
+footer li::after { content: " | "; }
