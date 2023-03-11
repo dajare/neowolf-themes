@@ -1,0 +1,55 @@
+/* ** Neowolf styles for Pure CSS Layout
+ *    needs to come last!
+ * **/
+ 
+html {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Helvetica", sans-serif;
+}
+
+body {
+    color: #333;
+}
+
+#menu {
+    margin-left: -200px;
+    width: 200px;
+}
+
+#menu ul ul ul li a::before {
+    content: '↘ ';
+}
+
+#menu .menu-item-divided > a {
+    color: #fff;
+}
+
+@media (max-width: 48em) {
+    /* Only apply this when the window is small. Otherwise, the following
+    case results in extra padding on the left:
+        * Make the window small.
+        * Tap the menu to trigger the active state.
+        * Make the window large again.
+    */
+    #layout.active {
+        position: relative;
+        left: 200px;
+    }
+}
+
+/*
+Hides the menu at `48em`, but modify this based on your app's needs.
+*/
+@media (min-width: 48em) {
+
+    #layout {
+        padding-left: 200px; /* left col width "#menu" */
+        left: 0;
+    }
+    #menu {
+       left: 200px;
+    }
+}
+
+.pure-menu-heading, .pure-menu-link {
+    white-space: normal;
+}
