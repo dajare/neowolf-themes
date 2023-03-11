@@ -29,6 +29,10 @@ body {
     width: 200px;
 }
 
+#menu a {
+    color: #ebeb00;
+}
+
 #menu ul ul ul li a::before {
     content: '↘ ';
 }
