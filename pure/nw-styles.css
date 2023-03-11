@@ -10,6 +10,11 @@ body {
     color: #333;
 }
 
+.info {
+    color: #666;
+    font-size: smaller;
+}
+
 #layout.active #menu {
     left: 200px;
     width: 200px;
